@@ -1,5 +1,8 @@
 # Loging and Monitoring
 
+* FortiGate date and time should be accurate for effective logging
+* NTP server recommended
+
 ### Log types and subtypes
 
 There are 3 different types of logs: traffic logs, event logs, security logs
@@ -63,7 +66,16 @@ There are 3 different types of logs: traffic logs, event logs, security logs
   * SNMP
   * FortiAnalyzer/FortiManager:
     * They have a list of registered (allowed) devices
-    * Fortigate uses port 514 for log transmission
+    * Fortigate uses UDP/TCP port 514 for log transmission
+      * TCP: If you enable logging to FortiAnalyzer using the GUI, reliable logging is auto-enabled
+      * UDP: If you enable logging to FortiAnalyzer using the CLI, reliable logging in not auto-enabled. You must manually
+      enable using the CLI command.
+      <pre>
+      # config log fortianalizer setting
+          set reliable [enable/disable]
+      # config log syslogd setting
+          set reliable [enable/disable]    
+      </pre>
     * FortiManager
       * Primary purpose: to centralize management of multiple FortiGate devices
       * Like FortiAnalizer, can also store logs and generate reports, but has fixed amount per day that is less than
@@ -85,12 +97,38 @@ There are 3 different types of logs: traffic logs, event logs, security logs
     syslogd4          Configure fourth syslog device.
     webtrends         Configure Web trends.
     </pre>
-
+* FortiGate logs can be sent to syslog servers in CSV or CEF format
+    <pre>
+    config log syslogd3 setting
+        set format [csv | cef]
+    end    
+    </pre>
 * What if FortiAnalyzer Temporarily is unavailable?
   * The FortiGate `miglogd` process catches logs on FortiGate when FortiAnalyzer is not reachable.
   * When maximum catched value is reached, `miglogd` will drop cached logs (oldest first)
   * When FortiAnalyzer connection is back, `miglogd` will send the cached logs.
- 
-### Configureing Log Settings
-* FortiGate date and time should be accurate for effective logging
-* NTP server recommended
+
+### Log settings
+* Decides if, where, and how a log is stored
+  * locally? Enable disk logging
+  * historical view (not just real-time)? Enable historical FortiView
+  * Remote logging? Upload time? Reliable logging? Encrypted using OFTPS? Configure remote logging
+    <pre>
+    # config log fortianalizer setting
+        set reliable [enable | disable]
+        set enc-algorithm [high-medium | high | low | disable]
+    </pre>
+* Decides whether logs are generated based on your firewall policies
+  * log allowed traffic? security events or all sessions? Configure **Log Allowed Traffic** setting on your firewall
+  policy (**Policy & Object > IPv4 Policy**)
+  * logs from traffic sent through your security profile? Enable one or more security profiles on your firewall policy
+  (**Policy & Object > IPv4 Policy**)
+
+#### Hiding user names in logs
+* Some laws require that usernames be anonymized
+  <pre>
+  # config log setting
+      set user-anonymize enable
+    end    
+  </pre>
+  * This commands sets the user name in the logs to `anonymous`
