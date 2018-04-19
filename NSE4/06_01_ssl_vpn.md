@@ -55,4 +55,4 @@
 3. Configure SSL VPN settings
 4. Create a firewall policy to accept and decrypt packets
 5. Optional: Create a firewall policy to route traffic to the Internet and apply security profiles:
-  * When split tunneling is disabled
+   * When split tunneling is disabled
