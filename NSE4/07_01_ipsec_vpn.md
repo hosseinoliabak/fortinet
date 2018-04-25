@@ -140,9 +140,11 @@ VPN traffic must match selectors in one of the phase 2 SAs. If it does not, the 
 ## Redundant VPN
 
 Partially redundant: One peer has two connections:
+
   ![vpn partial redundant](https://user-images.githubusercontent.com/31813625/39252643-14b0daa0-4874-11e8-93a4-0a8cef04d86c.png)
 
 Fully redundant: Both peers have two connections:
+
   ![vpn fully redundant](https://user-images.githubusercontent.com/31813625/39252813-75a98e24-4874-11e8-91c7-0638b4fc7f06.png)
 
 Configuration:
