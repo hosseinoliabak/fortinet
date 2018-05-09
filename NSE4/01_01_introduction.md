@@ -17,12 +17,14 @@ compared to separate dedicated appliances.
   * Internet connection and contract required
   * Provided by GortiGuard Distribution Network (FDN)
     * Major datacenters in North America, Asia, and Europe or from FDN through your FortiManager
-  * Package updates: FortiGuard AV and IPS
+  * Package updates (**Periodically**): FortiGuard AV and IPS
     * update.fortiguard.net
     * TCP port 443 (SSL)
-  * Live queries: FortiGuard Web Filtering, DNS Filtering, and Antispam
+  * Live queries (**Real-time**): FortiGuard Web Filtering, DNS Filtering, and Antispam
     * service.fortiguard.net
     * Proprietary protocol on UDP port 53 or 8888    
+
+![image](https://user-images.githubusercontent.com/31813625/39777670-2a68d056-52d2-11e8-9a99-f8fbd8465e67.png)
 
 **FortiGate Hardware:**
 * Application-specific integrated circuit (ASIC)
@@ -70,7 +72,7 @@ Administrator Profiles Hierarchy
 
 ### Resetting a lost admin password
 1. Hard power cycle
-2. Only during first 60 seconds after boot (varies by model)
+2. Only during first 30 seconds after boot (varies by model)
    * Tip: Copy the serial number into the terminal buffer, then paste
 3. Trough the hardware console port
    * Username: `maintainer`
