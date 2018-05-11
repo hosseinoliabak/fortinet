@@ -18,6 +18,8 @@ There are 3 different types of logs: traffic logs, event logs, security logs
 | | WAD | Anomaly (DoS-policy) |
 | | Wireless | WAF |
 
+![image](https://user-images.githubusercontent.com/31813625/39827610-742cfc44-5386-11e8-83c2-1617b07fb5df.png)
+
 ### Log Levels
 0- Emergency: system unstable<br />
 1- Alert: immediate action required<br />
@@ -118,7 +120,7 @@ There are 3 different types of logs: traffic logs, event logs, security logs
         set reliable [enable | disable]
         set enc-algorithm [high-medium | high | low | disable]
     </pre>
-* Decides whether logs are generated based on your firewall policies
+* Firewall policy setting decides if a log message is generated or not
   * log allowed traffic? security events or all sessions? Configure **Log Allowed Traffic** setting on your firewall
   policy (**Policy & Object > IPv4 Policy**)
   * logs from traffic sent through your security profile? Enable one or more security profiles on your firewall policy
@@ -132,3 +134,13 @@ There are 3 different types of logs: traffic logs, event logs, security logs
     end    
   </pre>
   * This commands sets the user name in the logs to `anonymous`
+  
+### Backing up logs
+<pre>
+fw (VDOM) # <b>exe backup disk alllogs ?</b>
+<b>ftp</b>     Backup all log files to FTP server.
+<b>tftp</b>    Backup all log file(s) to TFTP server.
+<b>usb</b>     Backup all log files to USB.
+fw (VDOM) # <b>exe backup disk log usb</b>
+<i>string</i>    , traffic, event, virus, webfilter, ips, emailfilter, anomaly, voip, dlp, app-ctrl, waf
+</pre>
